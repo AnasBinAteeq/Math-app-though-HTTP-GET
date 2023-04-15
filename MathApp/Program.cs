@@ -81,6 +81,20 @@ app.Run(async(HttpContext context) =>
             {
                 await context.Response.WriteAsync($"Result of {operation} operation on {firstno.ToString()} & {secondno.ToString()} is: {result.Value.ToString()}");
             }
+
+            else
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync("Invalid Input for operation\n");
+            }
+        }
+        else
+        {
+            if (context.Response.StatusCode == 200)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync("No Input for Operation\n");
+            }
         }
 
 
